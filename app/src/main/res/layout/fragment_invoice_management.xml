@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Titel -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rechnungsverwaltung"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Arbeitstitel -->
+        <TextView
+            android:id="@+id/thesis_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Titel der Arbeit"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Studentenname -->
+        <TextView
+            android:id="@+id/student_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Student: Name"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Betreuername -->
+        <TextView
+            android:id="@+id/supervisor_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Betreuer: Name"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Rechnungsstatus -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rechnungsstatus:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner
+            android:id="@+id/invoice_status_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Update Button -->
+        <Button
+            android:id="@+id/update_invoice_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:minHeight="48dp"
+            android:text="Status aktualisieren"
+            android:textSize="16sp"
+            android:backgroundTint="#2196F3"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Neue Rechnung Button -->
+        <Button
+            android:id="@+id/create_invoice_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:minHeight="48dp"
+            android:text="Neue Rechnung erstellen"
+            android:textSize="16sp"
+            android:backgroundTint="#4CAF50"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Rechnungshistorie -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rechnungshistorie:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/invoice_history_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lade Rechnungshistorie..."
+            android:textSize="14sp"
+            android:background="#f9f9f9"
+            android:padding="12dp"
+            android:lineSpacingExtra="4dp" />
+
+        <!-- Hinweis -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Standard-Rechnungsbetrag: 250,00 € pro Begutachtung"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>

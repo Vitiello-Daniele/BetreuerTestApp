@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">BetreuerApp</string>
+
+    <!-- Fachbereiche für Spinner -->
+    <string-array name="expertise_areas">
+        <item>Alle Bereiche</item>
+        <item>Wirtschaftsinformatik</item>
+        <item>Software Engineering</item>
+        <item>Data Science</item>
+        <item>Künstliche Intelligenz</item>
+        <item>IT-Sicherheit</item>
+        <item>Web Development</item>
+        <item>Mobile Development</item>
+        <item>Datenbanken</item>
+        <item>Projektmanagement</item>
+    </string-array>
+
+    <!-- Status für Dashboard -->
+    <string-array name="thesis_statuses">
+        <item>Alle Status</item>
+        <item>In Abstimmung</item>
+        <item>Angemeldet</item>
+        <item>Abgegeben</item>
+        <item>Kolloquium gehalten</item>
+    </string-array>
+
+    <!-- Status-Übergänge -->
+    <string-array name="status_transitions">
+        <item>In Abstimmung</item>
+        <item>Angemeldet</item>
+        <item>Abgegeben</item>
+        <item>Kolloquium gehalten</item>
+    </string-array>
+
+    <!-- Themen Status Filter -->
+    <string-array name="topic_status_filter">
+        <item>Alle Status</item>
+        <item>Verfügbar</item>
+        <item>Vergeben</item>
+        <item>Abgeschlossen</item>
+    </string-array>
+
+    <!-- Themen Status Werte -->
+    <string-array name="topic_status_values">
+        <item>Verfügbar</item>
+        <item>Vergeben</item>
+        <item>Abgeschlossen</item>
+    </string-array>
+
+    <!-- Zweitgutachter Filter -->
+    <string-array name="review_filter_options">
+        <item>Alle anzeigen</item>
+        <item>In Begutachtung</item>
+        <item>Abgeschlossen</item>
+        <item>Rechnungen gestellt</item>
+        <item>Rechnungen bezahlt</item>
+        <item>Ohne Rechnung</item>
+    </string-array>
+
+    <!-- Rechnungsstatus -->
+    <string-array name="invoice_status_options">
+        <item>Nicht gestellt</item>
+        <item>Gestellt</item>
+        <item>Bezahlt</item>
+    </string-array>
+</resources>

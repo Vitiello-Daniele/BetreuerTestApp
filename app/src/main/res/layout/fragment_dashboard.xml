@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- ✅ NEU: IU Header -->
+    <TextView
+        android:id="@+id/iu_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IU Hochschule\nMobile Software Engineering II\nDLBCSEMSE02_D\nBetreuer-App"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="#E8EAF6"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:lineSpacingExtra="4dp" />
+
+    <!-- ✅ NEU: Autoren -->
+    <TextView
+        android:id="@+id/authors_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gemeinsam entwickelt von: Danielle Vitiello und Ivan Paunovic"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="#666666"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Titel -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Betreuer Dashboard"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Zusammenfassung -->
+    <TextView
+        android:id="@+id/summary_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zusammenfassung wird geladen..."
+        android:textSize="14sp"
+        android:background="#f5f5f5"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"
+        android:lineSpacingExtra="4dp" />
+
+    <!-- Filter Bereich -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nach Status filtern:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <Spinner
+        android:id="@+id/status_filter_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Arbeiten Liste -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Meine betreuten Arbeiten:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <ListView
+        android:id="@+id/theses_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Schnellaktionen -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Schnellaktionen:"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/add_thesis_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:text="Neue Arbeit hinzufügen"
+        android:textSize="16sp"
+        android:backgroundTint="#4CAF50"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/refresh_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:minHeight="48dp"
+        android:text="Aktualisieren"
+        android:textSize="16sp" />
+
+</LinearLayout>

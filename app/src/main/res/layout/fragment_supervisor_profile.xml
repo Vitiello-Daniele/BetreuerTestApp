@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Betreuer Name -->
+        <TextView
+            android:id="@+id/supervisor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prof. Dr. Max Mustermann"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Fachbereich -->
+        <TextView
+            android:id="@+id/supervisor_expertise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fachbereich: Wirtschaftsinformatik"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- E-Mail -->
+        <TextView
+            android:id="@+id/supervisor_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="E-Mail: max.mustermann@iu.de"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Beschreibung -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beschreibung:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/supervisor_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Erfahrung in Mobile Development und Cloud Computing. Spezialisiert auf Android-Entwicklung mit Java und Kotlin."
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Verfügbare Themen -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verfügbare Themen:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/supervisor_topics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- Entwicklung einer Betreuer-App\n- Machine Learning in mobilen Anwendungen\n- Cloud-Integration für Mobile Apps"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Kontakt-Button -->
+        <Button
+            android:id="@+id/contact_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Kontakt aufnehmen"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</ScrollView>
