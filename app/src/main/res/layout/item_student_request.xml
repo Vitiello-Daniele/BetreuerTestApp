@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:background="@drawable/bg_request_card">
+
+    <!-- NEU: Status über dem Titel -->
+    <TextView
+        android:id="@+id/tv_request_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Angefragt"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Titel (nur noch Titel, ohne Status in Klammern) -->
+    <TextView
+        android:id="@+id/tv_request_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Titel"
+        android:textStyle="bold"
+        android:textSize="14sp" />
+
+    <!-- Fachgebiet -->
+    <TextView
+        android:id="@+id/tv_request_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fachgebiet: -"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp" />
+
+    <!-- Tutor -->
+    <TextView
+        android:id="@+id/tv_request_tutor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tutor: -"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp" />
+
+    <!-- Beschreibung -->
+    <TextView
+        android:id="@+id/tv_request_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Beschreibung"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp" />
+</LinearLayout>

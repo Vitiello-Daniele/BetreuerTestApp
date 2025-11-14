@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7FBFF">
+
+    <!-- E-Mail -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/bg_input_outline" />
+
+    <!-- Passwort -->
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:background="@drawable/bg_input_outline" />
+
+    <!-- Login-Button -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_login"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:background="@drawable/bg_button_primary"
+        android:backgroundTint="@null" />
+
+    <!-- Info-Block unten -->
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:padding="16dp"
+        android:background="#F3F4F6"
+        android:text="IU Hochschule\nMobile Software Engineering II\nDLBCSEMSE02_D\nBetreuer-App\n\nGemeinsam entwickelt von: Ivan Paunovic und Danielle Vitiello"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp" />
+
+</LinearLayout>

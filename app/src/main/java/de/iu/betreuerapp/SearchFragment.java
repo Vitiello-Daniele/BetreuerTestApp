@@ -4,166 +4,229 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-import androidx.fragment.app.Fragment;
-import java.util.ArrayList;
-import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+
+/**
+ * "Betreuer finden" (Student-Sicht)
+ */
 public class SearchFragment extends Fragment {
 
     private EditText searchInput;
-    private Spinner expertiseSpinner;
-    private Button searchButton;
-    private TextView infoText;
+    private Spinner areaSpinner;
+    private ListView listView;
+    private TextView emptyView;
+    private TextView tvTitle; // Überschrift angleichen
 
-    // ✅ LISTE MIT VERSCHIEDENEN BETREUERN
-    private List<Supervisor> supervisorList;
+    private ArrayAdapter<SupervisorDirectory.Entry> adapter;
 
+    private final List<SupervisorDirectory.Entry> allEntries =
+            new ArrayList<>(Arrays.asList(SupervisorDirectory.getAll()));
+    private final List<SupervisorDirectory.Entry> filteredEntries = new ArrayList<>();
+
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
-        // UI Elemente initialisieren
-        searchInput = view.findViewById(R.id.search_input);
-        expertiseSpinner = view.findViewById(R.id.expertise_spinner);
-        searchButton = view.findViewById(R.id.search_button);
-        infoText = view.findViewById(R.id.info_text);
+        if (!AuthGuard.requireRole(this, "student")) {
+            return new View(requireContext());
+        }
 
-        // ✅ INFO-TEXT SETZEN
-        infoText.setText("IU Hochschule\nMobile Software Engineering II\nDLBCSEMSE02_D\nBetreuer-App\n\nGemeinsam entwickelt von: Ivan Paunovic und Danielle Vitiello");
+        View view = inflater.inflate(R.layout.fragment_search_supervisors, container, false);
 
-        // Betreuer-Daten laden
-        loadSupervisors();
+        // Views
+        searchInput = view.findViewById(R.id.et_search);
+        areaSpinner = view.findViewById(R.id.spinner_area);
+        listView    = view.findViewById(R.id.list_supervisors);
+        emptyView   = view.findViewById(R.id.tv_empty);
 
-        // Spinner mit Fachbereichen füllen
-        setupExpertiseSpinner();
+        setupAreaSpinner();
+        setupList();
+        setupSearch();
 
-        // Such-Button Click Listener
-        searchButton.setOnClickListener(v -> performSearch());
+        // initiale Liste
+        applyFilter();
 
         return view;
     }
 
-    private void loadSupervisors() {
-        supervisorList = new ArrayList<>();
+    // ----------------------------------------------------
+    // Setup
+    // ----------------------------------------------------
 
-        // ✅ VERSCHIEDENE BETREUER HINZUFÜGEN
-        supervisorList.add(new Supervisor("1", "Prof. Dr. Elena Weber", "elena.weber@iu.de", "Wirtschaftsinformatik", "Spezialisiert auf Mobile Development und Educational Technology. 10+ Jahre Erfahrung."));
-        supervisorList.add(new Supervisor("2", "Dr. Markus Schmidt", "markus.schmidt@iu.de", "Data Science", "Experte für Machine Learning und KI. Forschungsschwerpunkt: Natural Language Processing."));
-        supervisorList.add(new Supervisor("3", "Prof. Dr. Sarah Fischer", "sarah.fischer@iu.de", "IT-Sicherheit", "Cybersecurity-Spezialistin mit Fokus auf Cloud Security und Netzwerksicherheit."));
-        supervisorList.add(new Supervisor("4", "Dr. Thomas Wagner", "thomas.wagner@iu.de", "Software Engineering", "Agile Methoden, DevOps und Continuous Integration. Industrieerfahrung bei Tech-Konzernen."));
-        supervisorList.add(new Supervisor("5", "Prof. Dr. Anna Bauer", "anna.bauer@iu.de", "Datenbanken", "Big Data, NoSQL und verteilte Datenbanksysteme. Forschung zu Performance-Optimierung."));
-        supervisorList.add(new Supervisor("6", "Dr. Michael Hoffmann", "michael.hoffmann@iu.de", "Web Development", "Full-Stack Entwicklung, Cloud Computing und Microservices-Architekturen."));
-        supervisorList.add(new Supervisor("7", "Prof. Dr. Julia Schulz", "julia.schulz@iu.de", "Projektmanagement", "SCRUM, Agile Coaching und IT-Projektleitung. Zertifizierte Projektmanagerin."));
-        supervisorList.add(new Supervisor("8", "Dr. Robert Klein", "robert.klein@iu.de", "Künstliche Intelligenz", "Computer Vision, Deep Learning und autonome Systeme. Publikationen in Top-Konferenzen."));
-    }
+    private void setupAreaSpinner() {
+        // Einmalige Liste mit "Alle Bereiche"
+        List<String> areas = new ArrayList<>();
+        areas.add("Alle Bereiche");
 
-    private void setupExpertiseSpinner() {
-        // ArrayAdapter für den Spinner erstellen
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.expertise_areas,
-                android.R.layout.simple_spinner_item
-        );
-
-        // Layout für die Dropdown-Ansicht
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Adapter zum Spinner hinzufügen
-        expertiseSpinner.setAdapter(adapter);
-    }
-
-    private void performSearch() {
-        String searchTerm = searchInput.getText().toString().trim().toLowerCase();
-        String expertise = expertiseSpinner.getSelectedItem().toString();
-
-        // ✅ ECHTE SUCHE DURCHFÜHREN
-        Supervisor foundSupervisor = searchSupervisors(searchTerm, expertise);
-
-        if (foundSupervisor != null) {
-            // Zur Profilansicht mit gefundenem Betreuer navigieren
-            navigateToSupervisorProfile(foundSupervisor);
-        } else {
-            // Kein Betreuer gefunden
-            Toast.makeText(requireContext(), "Kein Betreuer gefunden für: " + searchTerm, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private Supervisor searchSupervisors(String searchTerm, String expertise) {
-        // ✅ SUCHALGORITHMUS
-        List<Supervisor> matchingSupervisors = new ArrayList<>();
-
-        for (Supervisor supervisor : supervisorList) {
-            boolean matchesSearch = searchTerm.isEmpty() ||
-                    supervisor.getName().toLowerCase().contains(searchTerm) ||
-                    supervisor.getExpertise().toLowerCase().contains(searchTerm) ||
-                    supervisor.getDescription().toLowerCase().contains(searchTerm);
-
-            boolean matchesExpertise = expertise.equals("Alle Bereiche") ||
-                    supervisor.getExpertise().equals(expertise);
-
-            if (matchesSearch && matchesExpertise) {
-                matchingSupervisors.add(supervisor);
+        HashSet<String> seen = new HashSet<>();
+        for (SupervisorDirectory.Entry e : allEntries) {
+            if (e == null) continue;
+            if (e.area != null) {
+                String a = e.area.trim();
+                if (!a.isEmpty() && seen.add(a)) {
+                    areas.add(a);
+                }
             }
         }
 
-        // Rückgabe des ersten passenden Betreuers (oder null falls keiner)
-        if (!matchingSupervisors.isEmpty()) {
-            android.util.Log.d("Search", "Gefundene Betreuer: " + matchingSupervisors.size());
-            return matchingSupervisors.get(0); // Ersten Betreuer zurückgeben
-        }
+        ArrayAdapter<String> areaAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                areas
+        );
+        areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        areaSpinner.setAdapter(areaAdapter);
+        areaSpinner.setSelection(0, false);
 
-        return null;
+        // WICHTIG: sofort filtern, wenn Auswahl geändert wird
+        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                applyFilter();
+            }
+            @Override public void onNothingSelected(AdapterView<?> parent) { }
+        });
     }
 
-    private void navigateToSupervisorProfile(Supervisor supervisor) {
-        // SupervisorProfileFragment erstellen
-        SupervisorProfileFragment profileFragment = new SupervisorProfileFragment();
+    private void setupList() {
+        adapter = new ArrayAdapter<SupervisorDirectory.Entry>(
+                requireContext(),
+                android.R.layout.simple_list_item_2,
+                android.R.id.text1,
+                filteredEntries
+        ) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                TextView t1 = v.findViewById(android.R.id.text1);
+                TextView t2 = v.findViewById(android.R.id.text2);
 
-        // ✅ BETREUER-DATEN ÜBERGEBEN
+                SupervisorDirectory.Entry e = getItem(position);
+                if (e != null) {
+                    t1.setText(e.name != null ? e.name : "Unbekannte Betreuungsperson");
+
+                    StringBuilder sb = new StringBuilder();
+                    if (e.area != null && !e.area.isEmpty()) sb.append(e.area);
+                    if (e.email != null && !e.email.isEmpty()) {
+                        if (sb.length() > 0) sb.append(" • ");
+                        sb.append(e.email);
+                    }
+                    if (e.areaInfo != null && !e.areaInfo.isEmpty()) {
+                        if (sb.length() > 0) sb.append(" • ");
+                        sb.append(e.areaInfo);
+                    }
+                    t2.setText(sb.toString());
+                }
+
+                return v;
+            }
+        };
+
+        listView.setAdapter(adapter);
+        listView.setEmptyView(emptyView);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            if (position < 0 || position >= filteredEntries.size()) return;
+            SupervisorDirectory.Entry e = filteredEntries.get(position);
+            openSupervisorProfile(e);
+        });
+    }
+
+    private void setupSearch() {
+        searchInput.addTextChangedListener(new android.text.TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void afterTextChanged(android.text.Editable s) { applyFilter(); }
+        });
+    }
+
+    // ----------------------------------------------------
+    // Filter-Logik
+    // ----------------------------------------------------
+    private void applyFilter() {
+        String query = (searchInput.getText() != null)
+                ? searchInput.getText().toString().trim().toLowerCase(Locale.ROOT)
+                : "";
+
+        // "Alle Bereiche" => kein Area-Filter
+        String selectedArea = null;
+        Object sel = areaSpinner.getSelectedItem();
+        if (sel != null) {
+            String txt = sel.toString().trim();
+            if (!txt.isEmpty() && !"Alle Bereiche".equalsIgnoreCase(txt)) {
+                selectedArea = txt;
+            }
+        }
+
+        filteredEntries.clear();
+
+        for (SupervisorDirectory.Entry e : allEntries) {
+            if (e == null) continue;
+
+            // Fachbereich-Filter
+            if (selectedArea != null) {
+                String area = e.area != null ? e.area.trim() : "";
+                if (!area.equalsIgnoreCase(selectedArea)) continue;
+            }
+
+            // Textsuche: Name + E-Mail + Fach + Beschreibung
+            if (!query.isEmpty()) {
+                String hay = (safe(e.name) + " " + safe(e.email) + " " + safe(e.area) + " " + safe(e.areaInfo))
+                        .toLowerCase(Locale.ROOT);
+                if (!hay.contains(query)) continue;
+            }
+
+            filteredEntries.add(e);
+        }
+
+        adapter.notifyDataSetChanged();
+
+        if (emptyView != null) {
+            boolean empty = filteredEntries.isEmpty();
+            emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
+            if (empty) emptyView.setText("Keine passenden Betreuer:innen gefunden.");
+        }
+    }
+
+    private String safe(String s) { return s == null ? "" : s; }
+
+    // ----------------------------------------------------
+    // Navigation
+    // ----------------------------------------------------
+    private void openSupervisorProfile(SupervisorDirectory.Entry e) {
+        if (e == null) return;
+
         Bundle args = new Bundle();
-        args.putString("supervisor_name", supervisor.getName());
-        args.putString("supervisor_email", supervisor.getEmail());
-        args.putString("supervisor_expertise", supervisor.getExpertise());
-        args.putString("supervisor_description", supervisor.getDescription());
-        profileFragment.setArguments(args);
+        args.putString("supervisor_id", e.id);
+        args.putString("supervisor_name", e.name);
+        args.putString("supervisor_email", e.email);
+        args.putString("supervisor_expertise", e.area);
+        args.putString("supervisor_description", e.areaInfo);
 
-        // Fragment wechseln
+        SupervisorProfileFragment f = new SupervisorProfileFragment();
+        f.setArguments(args);
+
         requireActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, profileFragment)
-                .addToBackStack("search")
+                .replace(R.id.fragment_container, f)
+                .addToBackStack("search_supervisors")
                 .commit();
-
-        android.util.Log.d("Search", "Zeige Profil von: " + supervisor.getName());
-    }
-
-    // ✅ INNERE KLASSE FÜR BETREUER-DATEN
-    private static class Supervisor {
-        private String id;
-        private String name;
-        private String email;
-        private String expertise;
-        private String description;
-
-        public Supervisor(String id, String name, String email, String expertise, String description) {
-            this.id = id;
-            this.name = name;
-            this.email = email;
-            this.expertise = expertise;
-            this.description = description;
-        }
-
-        public String getId() { return id; }
-        public String getName() { return name; }
-        public String getEmail() { return email; }
-        public String getExpertise() { return expertise; }
-        public String getDescription() { return description; }
     }
 }

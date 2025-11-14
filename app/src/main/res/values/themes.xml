@@ -1,9 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Globaler Button-Style -->
+    <style name="AppButtonStyle" parent="@style/Widget.Material3.Button">
+        <!-- Gelbe Buttons -->
+        <item name="android:backgroundTint">#FFC107</item>
+        <item name="backgroundTint">#FFC107</item>
+
+        <!-- Text -->
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAllCaps">false</item>
+
+        <!-- Optional: eckig statt pillenförmig -->
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.None</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="Base.Theme.BetreuerApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- hier deine Farben usw. -->
+        <!-- Buttons global auf unseren Style setzen -->
+        <item name="buttonStyle">@style/AppButtonStyle</item>
+        <item name="materialButtonStyle">@style/AppButtonStyle</item>
     </style>
 
     <style name="Theme.BetreuerApp" parent="Base.Theme.BetreuerApp" />
+
 </resources>

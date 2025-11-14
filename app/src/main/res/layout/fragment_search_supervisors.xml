@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7FB">
+
+    <!-- Header-Bar wie "Meine Arbeiten" -->
+    <LinearLayout
+        android:id="@+id/header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FF9800"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Betreuer:in finden"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- Inhalt -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Suchfeld (gleiche Höhe wie Register) -->
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:hint="Name, E-Mail, Fachgebiet oder Beschreibung"
+            android:inputType="text"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:background="@drawable/bg_input_outline" />
+
+        <!-- Fachbereich-Filter (gleiche Höhe wie Register-Spinner) -->
+        <Spinner
+            android:id="@+id/spinner_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_spinner_outline" />
+
+        <!-- Liste der Betreuer:innen -->
+        <ListView
+            android:id="@+id/list_supervisors"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.5dp"
+            android:listSelector="@android:color/transparent" />
+
+        <!-- Empty View -->
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keine passenden Betreuer:innen gefunden."
+            android:textColor="#888888"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,139 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:background="#F7F7FB">
 
+    <!-- Header-Bar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="56dp"
+        android:background="#FF9800"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-        <!-- Titel -->
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_header_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Neues Thema erstellen"
-            android:textSize="24sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Thema Titel -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Titel *"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/title_input"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:hint="Titel der Abschlussarbeit"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Fachbereich -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fachbereich *"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
-
-        <Spinner
-            android:id="@+id/area_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Status -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Status *"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
-
-        <Spinner
-            android:id="@+id/status_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Beschreibung -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Beschreibung *"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/description_input"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:minHeight="120dp"
-            android:hint="Detaillierte Beschreibung des Themas..."
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Anforderungen -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Anforderungen"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/requirements_input"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:minHeight="100dp"
-            android:hint="Voraussetzungen und benötigte Skills..."
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Buttons -->
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:text="Thema speichern"
-            android:textSize="16sp"
-            android:backgroundTint="#4CAF50"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:text="Abbrechen"
-            android:textSize="16sp" />
-
-        <!-- Hinweis -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="* Pflichtfelder"
-            android:textSize="12sp"
-            android:textColor="#666666"
-            android:layout_marginTop="8dp" />
-
+            android:textSize="20sp"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
-</ScrollView>
+    <!-- Inhalt mit Scroll -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Titel Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Titel *"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Titel Input -->
+            <EditText
+                android:id="@+id/title_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:hint="Titel der Abschlussarbeit"
+                android:inputType="textCapSentences"
+                android:background="@drawable/bg_input_outline" />
+
+            <!-- Fachbereich Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:text="Fachbereich *"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Fachbereich Spinner -->
+            <Spinner
+                android:id="@+id/area_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="40dp"
+                android:background="@drawable/bg_spinner_outline" />
+
+            <!-- Beschreibung Label -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:text="Beschreibung *"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Beschreibung Input -->
+            <EditText
+                android:id="@+id/description_input"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:minHeight="120dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:hint="Detaillierte Beschreibung des Themas..."
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:background="@drawable/bg_input_outline" />
+
+            <!-- Speichern -->
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:minHeight="48dp"
+                android:layout_marginTop="16dp"
+                android:text="Thema speichern"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:background="@drawable/bg_button_primary"
+                android:backgroundTint="@null" />
+
+            <!-- Abbrechen -->
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:minHeight="48dp"
+                android:layout_marginTop="8dp"
+                android:text="Abbrechen"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:background="@drawable/bg_button_primary"
+                android:backgroundTint="@null" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

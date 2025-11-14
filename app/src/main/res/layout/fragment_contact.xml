@@ -1,104 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="#F7F7FB">
 
+    <!-- HEADER BAR (ORANGE, weiße Schrift) -->
     <LinearLayout
+        android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="56dp"
+        android:background="#FF9800"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-        <!-- Titel -->
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/header_label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kontaktformular"
-            android:textSize="24sp"
+            android:text="Betreuer:"
+            android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:textSize="20sp" />
 
-        <!-- Name -->
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/header_supervisor_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ihr Name *"
-            android:textSize="16sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/name_input"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:hint="Max Mustermann"
-            android:layout_marginBottom="16dp" />
-
-        <!-- E-Mail -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ihre E-Mail *"
-            android:textSize="16sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/email_input"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:hint="max.mustermann@iu.de"
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Nachricht -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ihre Nachricht *"
-            android:textSize="16sp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/message_input"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:minHeight="150dp"
-            android:hint="Beschreiben Sie hier Ihr Anliegen..."
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Senden Button -->
-        <Button
-            android:id="@+id/send_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:text="Nachricht senden"
-            android:textSize="16sp" />
-
-        <!-- Exposé Upload Button -->
-        <Button
-            android:id="@+id/upload_expose_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:minHeight="48dp"
-            android:text="Exposé hochladen"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="#4CAF50" />
-
-        <!-- Hinweis -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="* Pflichtfelder"
-            android:textSize="12sp"
-            android:textColor="#666666"
-            android:layout_marginTop="8dp" />
-
+            android:layout_marginStart="8dp"
+            android:text="—"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="20sp" />
     </LinearLayout>
 
-</ScrollView>
+    <!-- CONTENT -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Info -->
+            <TextView
+                android:id="@+id/supervisor_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Wähle eine Betreuungsperson über 'Betreuer:in finden'."
+                android:textSize="14sp"
+                android:textColor="#444444"
+                android:paddingBottom="12dp" />
+
+            <!-- Arbeitstitel -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arbeitstitel"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/thesis_title_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="z. B. Entwicklung einer Betreuer-App"
+                android:inputType="textCapSentences"
+                android:background="@drawable/bg_input_outline"
+                android:layout_marginTop="6dp" />
+
+            <!-- Kurzbeschreibung -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kurzbeschreibung / Exposé-Zusammenfassung"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/thesis_description_input"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="top"
+                android:hint="Beschreibe dein Thema, Forschungsfrage, Methode …"
+                android:inputType="textMultiLine"
+                android:background="@drawable/bg_input_outline"
+                android:layout_marginTop="6dp" />
+
+            <!-- Exposé -->
+            <Button
+                android:id="@+id/upload_expose_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exposé auswählen"
+                android:textColor="@android:color/black"
+                android:background="@drawable/bg_button_primary"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:id="@+id/expose_status_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exposé: noch nicht ausgewählt"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:paddingTop="6dp"
+                android:paddingBottom="8dp" />
+
+            <!-- Senden -->
+            <Button
+                android:id="@+id/send_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Betreuungsanfrage senden"
+                android:textColor="@android:color/black"
+                android:background="@drawable/bg_button_primary"
+                android:layout_marginTop="12dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

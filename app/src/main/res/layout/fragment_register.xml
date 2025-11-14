@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Vorname -->
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="0dp"
+            android:hint="@string/hint_first_name"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_input_outline" />
+
+        <!-- Nachname -->
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="12dp"
+            android:hint="@string/hint_last_name"
+            android:inputType="textPersonName"
+            android:background="@drawable/bg_input_outline" />
+
+        <!-- E-Mail -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="12dp"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/bg_input_outline" />
+
+        <!-- Passwort -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="12dp"
+            android:hint="@string/hint_password_min"
+            android:inputType="textPassword"
+            android:background="@drawable/bg_input_outline" />
+
+        <!-- Passwort wiederholen -->
+        <EditText
+            android:id="@+id/etPasswordRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="12dp"
+            android:hint="@string/hint_password_repeat"
+            android:inputType="textPassword"
+            android:background="@drawable/bg_input_outline" />
+
+        <!-- Dev-Hinweis -->
+        <TextView
+            android:id="@+id/tvDev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/dev_mode_hint"
+            android:textStyle="bold"
+            android:textColor="#B00020" />
+
+        <!-- Rolle (Spinner) -->
+        <Spinner
+            android:id="@+id/spRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="40dp"
+            android:layout_marginTop="12dp"
+            android:entries="@array/roles_array"
+            android:background="@drawable/bg_spinner_outline" />
+
+        <!-- Registrieren -->
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/btn_register"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:background="@drawable/bg_button_primary"
+            android:backgroundTint="@null" />
+
+    </LinearLayout>
+</ScrollView>

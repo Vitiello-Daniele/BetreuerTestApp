@@ -3,67 +3,108 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#F7F7FB">
 
-    <!-- Titel -->
-    <TextView
+    <!-- Header-Bar -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Themen Management"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="56dp"
+        android:background="#FF9800"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-    <!-- Filter Bereich -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nach Status filtern:"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meine Themenbörse"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
-    <Spinner
-        android:id="@+id/filter_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:minHeight="48dp"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Themen Liste -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Meine Themen:"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
-
-    <ListView
-        android:id="@+id/topics_listview"
+    <!-- Inhalt -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginBottom="16dp" />
+        android:padding="16dp">
 
-    <!-- Hinweis -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ℹ️ Kurzer Klick: Bearbeiten | Langer Klick: Löschen"
-        android:textSize="12sp"
-        android:textColor="#666666"
-        android:gravity="center"
-        android:layout_marginBottom="16dp" />
+        <!-- Entfernt: summary -->
 
-    <!-- Add Topic Button -->
-    <Button
-        android:id="@+id/add_topic_button"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:minHeight="48dp"
-        android:text="Neues Thema erstellen"
-        android:textSize="16sp"
-        android:backgroundTint="#4CAF50" />
+        <!-- Chip: Alle -->
+        <TextView
+            android:id="@+id/chip_filter_all"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:text="Alle (0)"
+            android:textSize="12sp"
+            android:background="@drawable/bg_filter_chip_inactive"
+            android:textColor="#666666"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Zeile mit den anderen Chips -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/chip_filter_available"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Eingestellt (0)"
+                android:textSize="12sp"
+                android:background="@drawable/bg_filter_chip_inactive"
+                android:textColor="#666666"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp" />
+
+            <TextView
+                android:id="@+id/chip_filter_taken"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:gravity="center"
+                android:text="Vergeben (0)"
+                android:textSize="12sp"
+                android:background="@drawable/bg_filter_chip_inactive"
+                android:textColor="#666666"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp" />
+
+            <!-- ACHTUNG: Abgeschlossen entfernt (wie du wolltest) -->
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_topics"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp" />
+
+        <Button
+            android:id="@+id/add_topic_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:minHeight="48dp"
+            android:layout_marginTop="8dp"
+            android:text="Neues Thema einstellen"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:background="@drawable/bg_button_primary"
+            android:backgroundTint="@null" />
+
+    </LinearLayout>
 
 </LinearLayout>

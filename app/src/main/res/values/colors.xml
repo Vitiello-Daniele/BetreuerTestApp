@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="status_open">#2196F3</color>        <!-- Blau: Angefragt -->
+    <color name="status_in_progress">#FFC107</color> <!-- Gelb: In Bearbeitung (Kollegium) -->
+    <color name="status_rejected">#F44336</color>    <!-- Rot: Abgelehnt -->
+    <color name="status_finished">#4CAF50</color>    <!-- Grün: Abgeschlossen -->
+    <color name="status_unknown">#9E9E9E</color>     <!-- Grau: Fallback -->
 </resources>

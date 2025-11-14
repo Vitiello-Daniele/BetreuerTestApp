@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Dein vorhandener Outline-Rand (Shape) -->
+    <item
+        android:drawable="@drawable/bg_input_outline" />
+
+    <!-- Pfeil rechts innen -->
+    <item
+        android:drawable="@drawable/ic_spinner_arrow"
+        android:gravity="right|center_vertical"
+        android:right="12dp" />
+</layer-list>

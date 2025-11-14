@@ -1,86 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="#FFF7FBFF">
 
+    <!-- Orange Header: Titel wird im Fragment auf den Tutor-Namen gesetzt -->
     <LinearLayout
+        android:id="@+id/header_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="56dp"
+        android:background="#FF9800"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-        <!-- Betreuer Name -->
         <TextView
-            android:id="@+id/supervisor_name"
-            android:layout_width="match_parent"
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prof. Dr. Max Mustermann"
-            android:textSize="24sp"
+            android:text="Betreuer:in"
             android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Fachbereich -->
-        <TextView
-            android:id="@+id/supervisor_expertise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fachbereich: Wirtschaftsinformatik"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- E-Mail -->
-        <TextView
-            android:id="@+id/supervisor_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="E-Mail: max.mustermann@iu.de"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Beschreibung -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Beschreibung:"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="16dp" />
-
-        <TextView
-            android:id="@+id/supervisor_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Erfahrung in Mobile Development und Cloud Computing. Spezialisiert auf Android-Entwicklung mit Java und Kotlin."
-            android:textSize="14sp"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Verfügbare Themen -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Verfügbare Themen:"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:id="@+id/supervisor_topics"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="- Entwicklung einer Betreuer-App\n- Machine Learning in mobilen Anwendungen\n- Cloud-Integration für Mobile Apps"
-            android:textSize="14sp"
-            android:layout_marginBottom="24dp" />
-
-        <!-- Kontakt-Button -->
-        <Button
-            android:id="@+id/contact_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Kontakt aufnehmen"
-            android:textSize="16sp" />
-
+            android:textSize="22sp"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
-</ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Fachbereich -->
+            <TextView
+                android:id="@+id/tv_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fachbereich: -"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- E-Mail -->
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E-Mail: -"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Beschreibung -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Beschreibung:"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Kontakt-Button -->
+            <Button
+                android:id="@+id/btn_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Kontakt aufnehmen"
+                android:textColor="@android:color/black"
+                android:background="@drawable/bg_button_primary"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

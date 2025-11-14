@@ -1,121 +1,128 @@
 package de.iu.betreuerapp;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class SupervisorProfileFragment extends Fragment {
 
-    private TextView supervisorName, supervisorExpertise, supervisorEmail, supervisorDescription, supervisorTopics;
-    private Button contactButton;
+    private TextView headerTitle;
+    private TextView tvArea;
+    private TextView tvEmail;
+    private TextView tvDescription;
+    private Button btnContact;
 
+    private String currentSupervisorId;
+    private String currentSupervisorName;
     private String currentSupervisorEmail;
+    private String currentSupervisorExpertise;
+    private String currentSupervisorDescription;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        if (!AuthGuard.requireRole(this, "student")) {
+            return new View(requireContext());
+        }
+
         View view = inflater.inflate(R.layout.fragment_supervisor_profile, container, false);
 
-        // UI Elemente initialisieren
-        supervisorName = view.findViewById(R.id.supervisor_name);
-        supervisorExpertise = view.findViewById(R.id.supervisor_expertise);
-        supervisorEmail = view.findViewById(R.id.supervisor_email);
-        supervisorDescription = view.findViewById(R.id.supervisor_description);
-        supervisorTopics = view.findViewById(R.id.supervisor_topics);
-        contactButton = view.findViewById(R.id.contact_button);
+        headerTitle   = view.findViewById(R.id.header_title);
+        tvArea        = view.findViewById(R.id.tv_area);
+        tvEmail       = view.findViewById(R.id.tv_email);
+        tvDescription = view.findViewById(R.id.tv_description);
+        btnContact    = view.findViewById(R.id.btn_contact);
 
-        // ✅ DYNAMISCHE DATEN VON DER SUCHE EMPFANGEN
-        setDataFromArguments();
+        readArgsAndBind();
 
-        // Kontakt-Button Click Listener
-        contactButton.setOnClickListener(v -> contactSupervisor());
+        if (headerTitle != null && currentSupervisorName != null) headerTitle.setText(currentSupervisorName);
+
+        btnContact.setOnClickListener(v -> openContactFragment());
 
         return view;
     }
 
-    private void setDataFromArguments() {
-        // ✅ DATEN VON SEARCHFRAGMENT EMPFANGEN
+    private void readArgsAndBind() {
         Bundle args = getArguments();
         if (args != null) {
-            String name = args.getString("supervisor_name", "Prof. Dr. Elena Weber");
-            String email = args.getString("supervisor_email", "elena.weber@iu.de");
-            String expertise = args.getString("supervisor_expertise", "Wirtschaftsinformatik");
-            String description = args.getString("supervisor_description", "Spezialisiert auf Mobile Development und Educational Technology.");
+            currentSupervisorId          = args.getString("supervisor_id", null);
+            currentSupervisorName        = args.getString("supervisor_name", null);
+            currentSupervisorEmail       = args.getString("supervisor_email", null);
+            currentSupervisorExpertise   = args.getString("supervisor_expertise", null);
+            currentSupervisorDescription = args.getString("supervisor_description", null);
+        }
 
-            // Daten anzeigen
-            supervisorName.setText(name);
-            supervisorExpertise.setText("Fachbereich: " + expertise);
-            supervisorEmail.setText("E-Mail: " + email);
-            supervisorDescription.setText(description);
-            currentSupervisorEmail = email;
+        if (currentSupervisorEmail != null) {
+            SupervisorDirectory.Entry e = SupervisorDirectory.findByEmail(currentSupervisorEmail);
+            if (e != null) {
+                currentSupervisorId          = e.id;
+                currentSupervisorName        = e.name;
+                currentSupervisorExpertise   = e.area;
+                currentSupervisorDescription = e.areaInfo;
+            }
+        }
 
-            // Themen basierend auf Fachbereich anzeigen
-            setTopicsForExpertise(expertise);
+        if (isEmpty(currentSupervisorName))  currentSupervisorName  = "Unbekannter Betreuer";
+        if (isEmpty(currentSupervisorEmail)) currentSupervisorEmail = "Keine E-Mail verfügbar";
 
+        // Header: "Betreuer: Name XY"
+        headerTitle.setText("Betreuer: " + currentSupervisorName);
+
+        if (!isEmpty(currentSupervisorExpertise)) {
+            tvArea.setText("Fachbereich: " + currentSupervisorExpertise);
+            tvArea.setVisibility(View.VISIBLE);
         } else {
-            // Fallback falls keine Daten übergeben wurden
-            setSampleData();
+            tvArea.setVisibility(View.GONE);
+        }
+
+        tvEmail.setText("E-Mail: " + currentSupervisorEmail);
+
+        if (!isEmpty(currentSupervisorDescription)) {
+            tvDescription.setText(currentSupervisorDescription);
+            tvDescription.setVisibility(View.VISIBLE);
+        } else {
+            tvDescription.setVisibility(View.GONE);
         }
     }
 
-    private void setTopicsForExpertise(String expertise) {
-        // ✅ THEMEN BASIEREND AUF FACHRICHTUNG
-        switch (expertise) {
-            case "Wirtschaftsinformatik":
-                supervisorTopics.setText("- Entwicklung einer Learning-Management-App\n- Mobile Payment-Sicherheit\n- E-Commerce Plattform Optimierung");
-                break;
-            case "Data Science":
-                supervisorTopics.setText("- KI-gestützte Lernempfehlungen\n- Predictive Maintenance in Industrie 4.0\n- Data Mining in Bildungsdaten");
-                break;
-            case "IT-Sicherheit":
-                supervisorTopics.setText("- Cybersecurity in Cloud-Infrastrukturen\n- Zero-Trust Security Modelle\n- Blockchain-Sicherheit");
-                break;
-            case "Software Engineering":
-                supervisorTopics.setText("- Microservices Performance-Optimierung\n- DevOps Pipeline Automation\n- Code Quality Analysis Tools");
-                break;
-            case "Datenbanken":
-                supervisorTopics.setText("- Big Data Processing Optimierung\n- NoSQL vs SQL Performance-Vergleich\n- Distributed Database Systems");
-                break;
-            case "Web Development":
-                supervisorTopics.setText("- Progressive Web Apps (PWA)\n- Serverless Architecture Patterns\n- Real-time Web Applications");
-                break;
-            case "Projektmanagement":
-                supervisorTopics.setText("- Agile Transformation in Unternehmen\n- Risk Management in IT-Projekten\n- Remote Team Collaboration Tools");
-                break;
-            case "Künstliche Intelligenz":
-                supervisorTopics.setText("- Computer Vision für autonome Systeme\n- Natural Language Processing\n- Reinforcement Learning Applications");
-                break;
-            default:
-                supervisorTopics.setText("- Entwicklung einer Betreuer-App\n- Machine Learning in mobilen Anwendungen\n- Cloud-Integration für Mobile Apps");
-        }
+    private boolean isEmpty(String s) {
+        return s == null || s.trim().isEmpty();
     }
 
-    private void setSampleData() {
-        // Fallback-Daten
-        supervisorName.setText("Prof. Dr. Elena Weber");
-        supervisorExpertise.setText("Fachbereich: Wirtschaftsinformatik");
-        supervisorEmail.setText("E-Mail: elena.weber@iu.de");
-        supervisorDescription.setText("Spezialisiert auf Mobile Development und Educational Technology. 10+ Jahre Erfahrung in der Betreuung von Abschlussarbeiten im Bereich Software Engineering.");
-        supervisorTopics.setText("- Entwicklung einer Betreuer-App\n- Machine Learning in mobilen Anwendungen\n- Cloud-Integration für Mobile Apps");
-        currentSupervisorEmail = "elena.weber@iu.de";
-    }
-
-    private void contactSupervisor() {
-        // E-Mail Intent erstellen mit AKTUELLER E-MAIL
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse("mailto:" + currentSupervisorEmail));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Anfrage Betreuung Abschlussarbeit");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Sehr geehrte/r Betreuer/in,\n\nich interessiere mich für eine Betreuung meiner Abschlussarbeit.\n\nMit freundlichen Grüßen");
-
-        // E-Mail App öffnen
-        if (emailIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
-            startActivity(emailIntent);
+    private void openContactFragment() {
+        if (isEmpty(currentSupervisorName) || isEmpty(currentSupervisorEmail)
+                || "Unbekannter Betreuer".equals(currentSupervisorName)) {
+            Toast.makeText(requireContext(),
+                    "Kein gültiger Betreuer ausgewählt.",
+                    Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        Bundle args = new Bundle();
+        if (!isEmpty(currentSupervisorId)) {
+            args.putString("supervisor_id", currentSupervisorId);
+        }
+        args.putString("supervisor_name", currentSupervisorName);
+        args.putString("supervisor_email", currentSupervisorEmail);
+
+        ContactFragment f = new ContactFragment();
+        f.setArguments(args);
+
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, f)
+                .addToBackStack("supervisor_profile")
+                .commit();
     }
 }

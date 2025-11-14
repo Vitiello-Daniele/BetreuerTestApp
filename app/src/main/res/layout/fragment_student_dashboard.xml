@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7FBFF">
+
+    <!-- Header-Bar -->
+    <LinearLayout
+        android:id="@+id/header_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FF9800"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meine Arbeiten"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <!-- Inhalt -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Vollbreite: Alle -->
+        <LinearLayout
+            android:id="@+id/chip_all_wide"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:background="@drawable/bg_filter_chip_active"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tv_chip_all_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alle (0)"
+                android:textColor="@android:color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Reihe mit 3 Chips -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <LinearLayout
+                android:id="@+id/chip_requested"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_filter_chip_inactive"
+                android:layout_marginEnd="8dp">
+                <TextView
+                    android:id="@+id/tv_chip_req_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Angefragt (0)"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chip_in_progress"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_filter_chip_inactive"
+                android:layout_marginEnd="8dp">
+                <TextView
+                    android:id="@+id/tv_chip_prog_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="In Bearbeitung (0)"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chip_finished"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_filter_chip_inactive">
+                <TextView
+                    android:id="@+id/tv_chip_fin_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abgeschlossen (0)"
+                    android:textSize="13sp"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Progress -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Empty -->
+        <TextView
+            android:id="@+id/tv_requests_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Noch keine Arbeiten vorhanden."
+            android:gravity="center"
+            android:textColor="#999999"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <!-- Liste -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_requests"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <!-- Primäre Aktion unten -->
+    <Button
+        android:id="@+id/btn_new_thesis"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:text="Neue Arbeit anfragen"
+        android:textColor="@android:color/black"
+        android:textAllCaps="false"
+        android:background="@drawable/bg_button_primary"
+        android:backgroundTint="@null"/>
+
+</LinearLayout>

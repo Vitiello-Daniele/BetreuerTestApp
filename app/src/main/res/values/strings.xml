@@ -63,4 +63,49 @@
         <item>Gestellt</item>
         <item>Bezahlt</item>
     </string-array>
+
+
+    <!-- Tabs -->
+    <string name="tab_login">Login</string>
+    <string name="tab_register">Registrieren</string>
+
+    <!-- Wait-Animation -->
+    <string name="please_wait">Bitte warten…</string>
+
+    <!-- DEV-Hinweis -->
+    <string name="dev_mode_hint">DEV-MODUS: Rolle wählbar (nicht für Produktion)</string>
+
+    <!-- Felder / Hints -->
+    <string name="hint_first_name">Vorname</string>
+    <string name="hint_last_name">Nachname</string>
+    <string name="hint_email">E-Mail</string>
+    <string name="hint_password">Passwort</string>
+    <string name="hint_password_repeat">Passwort wiederholen</string>
+    <string name="hint_password_min">Passwort (min. 6 Zeichen)</string>
+
+    <!-- Buttons -->
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Registrieren</string>
+
+    <!-- Rollen -->
+    <string-array name="roles_array">
+        <item>student</item>
+        <item>tutor</item>
+    </string-array>
+
+    <!-- Meldungen -->
+    <string name="msg_enter_name">Vor- und Nachname eingeben</string>
+    <string name="msg_enter_email_pw">E-Mail und Passwort eingeben</string>
+    <string name="msg_email_pw_min">E-Mail und min. 6 Zeichen Passwort</string>
+    <string name="msg_register_ok">Registriert als %1$s</string>
+    <string name="msg_register_fail">Registrierung fehlgeschlagen: %1$s</string>
+    <string name="msg_profile_fail">Profilfehler: %1$s</string>
+    <string name="msg_login_ok">Login erfolgreich</string>
+    <string name="msg_login_fail">Login fehlgeschlagen: %1$s</string>
+    <string name="msg_no_user_after_register">Kein User nach Registrierung gefunden</string>
+
+    <!-- Home Screens -->
+    <string name="welcome_name">Willkommen, %1$s</string>
+    <string name="btn_logout">Logout</string>
+
 </resources>

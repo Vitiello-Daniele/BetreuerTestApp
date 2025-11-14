@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FilterChipStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <!-- Innenabstand -->
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+
+        <!-- Text -->
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@android:color/black</item>
+
+        <!-- Standard-Hintergrund (wird bei Auswahl per Code überschrieben) -->
+        <item name="android:background">@drawable/bg_filter_chip_inactive</item>
+
+        <!-- Kleiner Abstand zwischen den Chips -->
+        <item name="android:layout_marginRight">8dp</item>
+    </style>
+</resources>

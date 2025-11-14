@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Such-Eingabe -->
+    <!-- Titel -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,6 +14,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
+    <!-- Suchfeld -->
     <EditText
         android:id="@+id/search_input"
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
         android:hint="Name oder Stichwort eingeben..."
         android:layout_marginBottom="16dp" />
 
-    <!-- Fachbereich Auswahl -->
+    <!-- Fachbereich Label -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,12 +31,13 @@
         android:textSize="16sp"
         android:layout_marginBottom="8dp" />
 
+    <!-- Fachbereich-Spinner (aus Directory + 'Alle Bereiche') -->
     <Spinner
         android:id="@+id/expertise_spinner"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:minHeight="48dp"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="16dp" />
 
     <!-- Such-Button -->
     <Button
@@ -44,22 +46,15 @@
         android:layout_height="48dp"
         android:minHeight="48dp"
         android:text="Suchen"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
 
-    <!-- ✅ NEU: Info-Text unter dem Such-Button -->
-    <TextView
-        android:id="@+id/info_text"
+    <!-- Ergebnisliste -->
+    <ListView
+        android:id="@+id/supervisor_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:padding="16dp"
-        android:background="#F3F4F6"
-        android:text="IU Hochschule\nMobile Software Engineering II\nDLBCSEMSE02_D\nBetreuer-App\n\nGemeinsam entwickelt von: Ivan Paunovic und Danielle Vitiello"
-        android:textSize="14sp"
-        android:textColor="#666666"
-        android:gravity="center"
-        android:lineSpacingExtra="4dp" />
-
-    <!-- Hier kommt später die Ergebnis-Liste -->
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="1dp" />
 
 </LinearLayout>
